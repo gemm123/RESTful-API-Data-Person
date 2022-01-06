@@ -1,0 +1,266 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Person RESTful API",
+        "description": "API Spec for Person RESTful API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080"
+        }
+    ],
+    "paths": {
+        "/persons":{
+            "get":{
+                "security": [
+                    {
+                        "personAuth":[]
+                    }
+                ],
+                "tags": ["PersonAPI"],
+                "description": "List all person",
+                "summary": "List all person",
+                "responses": {
+                    "200":{
+                        "description": "Success get all person",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "code":{
+                                            "type": "number"
+                                        },
+                                        "status":{
+                                            "type": "string"
+                                        },
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "$ref": "#/components/schemas/person"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post":{
+                "security": [
+                    {
+                        "personAuth":[]
+                    }
+                ],
+                "tags": ["PersonAPI"],
+                "description": "Create data person",
+                "summary": "Create data person",
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/createUpdatePerson"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Success create data person",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "code":{
+                                            "type": "number"
+                                        },
+                                        "status":{
+                                            "type": "number"
+                                        },
+                                        "data":{
+                                            "$ref":"#/components/schemas/person"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/persons/{personId}":{
+            "get":{
+                "security": [
+                    {
+                        "personAuth":[]
+                    }
+                ],
+                "tags": ["PersonAPI"],
+                "summary": "Get data person by id",
+                "description": "Get data person by id",
+                "parameters": [
+                    {
+                        "name": "personId",
+                        "in": "path",
+                        "description": "Person Id"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Success create data person",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "code":{
+                                            "type": "number"
+                                        },
+                                        "status":{
+                                            "type": "number"
+                                        },
+                                        "data":{
+                                            "$ref":"#/components/schemas/person"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "security": [
+                    {
+                        "personAuth":[]
+                    }
+                ],
+                "tags": ["PersonAPI"],
+                "description": "Update person data",
+                "summary": "Update person data",
+                "parameters": [
+                    {
+                        "name": "personId",
+                        "in": "path",
+                        "description": "Person Id"
+                    }
+                ],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/createUpdatePerson"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Success create data person",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "code":{
+                                            "type": "number"
+                                        },
+                                        "status":{
+                                            "type": "number"
+                                        },
+                                        "data":{
+                                            "$ref":"#/components/schemas/person"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "security": [
+                    {
+                        "personAuth":[]
+                    }
+                ],
+                "tags": ["PersonAPI"],
+                "summary": "Delete data person by id",
+                "description": "Delete data person by id",
+                "parameters": [
+                    {
+                        "name": "personId",
+                        "in": "path",
+                        "description": "Person Id"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Success delete data person",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "code":{
+                                            "type": "number"
+                                        },
+                                        "status":{
+                                            "type": "number"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "personAuth":{
+                "type": "apiKey",
+                "in": "header",
+                "name": "X-API-Key",
+                "description": "Authentication for Person API"
+            }
+        },
+        "schemas": {
+            "createUpdatePerson":{
+                "type": "object",
+                "properties": {
+                    "firstName":{
+                        "type": "string"
+                    },
+                    "lastName":{
+                        "type": "string"
+                    },
+                    "age":{
+                        "type": "number"
+                    }
+                }
+            },
+            "person":{
+                "type": "object",
+                "properties": {
+                    "id":{
+                        "type": "number"
+                    },
+                    "firstName":{
+                        "type": "string"
+                    },
+                    "lastName":{
+                        "type": "string"
+                    },
+                    "age":{
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    }
+}
