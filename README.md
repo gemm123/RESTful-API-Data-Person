@@ -70,7 +70,7 @@ Berikut adalah contoh request dan response tiap method yang ada pada API
      "data": {"id": 1, "firstName": "nama depan", "lastName": "nama belakang", "age": "umur"}
      
 ## Delete Data
-`DELETE localhost:8080/persons/1
+`DELETE localhost:8080/persons/1`
 
      Accept: application/json
      X-API-Key: KUNCIMASUK
